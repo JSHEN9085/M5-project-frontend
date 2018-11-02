@@ -3,9 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.3.2",
+    "@material-ui/icons": "^3.0.1",
     "react": "^16.6.0",
+    "react-actioncable-provider": "^1.0.3",
+    "react-background-slider": "^1.1.0",
+    "react-background-slideshow": "^1.0.4",
     "react-dom": "^16.6.0",
-    "react-scripts": "2.0.5"
+    "react-player": "^1.6.6",
+    "react-redux": "^5.1.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.5",
+    "redux": "^4.0.1",
+    "semantic-ui": "^2.4.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +33,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "html-loader": "^0.5.5",
+    "url-loader": "^1.1.2"
+  }
 }
