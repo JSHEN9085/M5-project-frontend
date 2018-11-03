@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class NewChatForm extends React.Component {
   state = {
     topic: '',
-    creator_id: 5
+    creator_id: 5   //this need to be changed to current user's ID
   };
 
   handleChange = e => {

@@ -10,14 +10,14 @@ class Chatroom extends Component {
   handleReceivedMessage = response => {
     console.log(response);
     const { message } = response;
-    let chat = {...this.props.chat}
+    let chat = {...this.props.activeChat}
     chat.messages = [...chat.messages, message];
-    this.setState({ chat });
+    this.props.addMessage(chat);
   };
 
   render() {
-    console.log(this.props.activeChat.messages)
-    // console.log(this.state.chat);
+    // console.log(this.props.activeChat);
+    // console.log(this.props.activeChat.messages)
     // console.log(this.props.chat.messages)
     return (
       <div>
@@ -36,7 +36,10 @@ class Chatroom extends Component {
 
 const mapStateToProps = ({ activeChat }) => ({ activeChat })
 
+const mapDispatchToProps = dispatch => ({
+  addMessage: chat => dispatch({type: "ADD_MESSAGE", chat})
+})
 
-export default connect(mapStateToProps) (Chatroom);
+export default connect(mapStateToProps, mapDispatchToProps) (Chatroom);
 
 // {this.props.chat.messages.map(message => message.content)}

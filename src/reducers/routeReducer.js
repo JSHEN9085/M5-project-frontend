@@ -18,6 +18,11 @@ export default function routerReducer(state = {
         activeChat: action.chat
       }
 
+    case 'ADD_MESSAGE':
+      return {...state,
+        activeChat: action.chat
+      }
+
     default:
       return state;
   }
