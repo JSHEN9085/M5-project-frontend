@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import BackgroundSlideshow from 'react-background-slideshow';
+// import BackgroundSlideshow from 'react-background-slideshow';
 // import BackgroundSlider from 'react-background-slider';
-import Background1 from '../Img/bg-1.jpg'
-import Background2 from '../Img/bg-2.jpg'
-import Background3 from '../Img/bg-3.jpg'
-import Background0 from '../Img/bg-00.gif'
+// import Background1 from '../Img/bg-1.jpg'
+// import Background2 from '../Img/bg-2.jpg'
+// import Background3 from '../Img/bg-3.jpg'
+// import Background0 from '../Img/bg-00.gif'
+// import { Card, Image, Button } from 'semantic-ui-react'
 import Video from '../Img/typing.mp4'
-import { Card, Image, Button } from 'semantic-ui-react'
 
 class Home extends Component {
 

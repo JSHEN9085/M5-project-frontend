@@ -1,9 +1,11 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
+import { connect } from 'react-redux';
 
 class NewChatForm extends React.Component {
   state = {
-    topic: ''
+    topic: '',
+    creator_id: 5
   };
 
   handleChange = e => {
@@ -16,7 +18,7 @@ class NewChatForm extends React.Component {
       method: 'POST',
       headers: HEADERS,
       body: JSON.stringify(this.state)
-    });
+    })
     this.setState({ topic: '' });
   };
 

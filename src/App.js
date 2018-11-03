@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Home from './Page/Home'
-import SignUpLogIn from './components/SignUpLogIn'
 
 // import ChatList from './containers/ChatList'
 
@@ -18,5 +17,3 @@ class App extends Component {
 }
 
 export default App;
-
-  // <Home />

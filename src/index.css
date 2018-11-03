@@ -58,4 +58,25 @@ opacity: 0.8;
 /* SignUpLogIn Style */
 
 
-/* Chatship List Style */
+/* MainPage Style */
+.ui.segment.violet.inverted {
+  text-align: center;
+}
+
+#root > table > tbody > tr > th:nth-child(1) {
+    width: 15%;
+}
+
+#root > table > tbody > tr > th:nth-child(3) {
+  width: 20%;
+}
+
+#root > table > tbody > tr > th:nth-child(4) {
+  width: 12%;
+}
+
+/* Chat Style */
+
+#root > table > tbody > tr > td.join-btn {
+  text-align: center;
+}

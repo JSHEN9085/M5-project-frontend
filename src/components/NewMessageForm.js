@@ -4,7 +4,6 @@ import { API_ROOT, HEADERS } from '../constants';
 class NewMessageForm extends React.Component {
   state = {
     content: '',
-    chat_id: 1,
     user_id: 1
   };
 
@@ -24,7 +23,7 @@ class NewMessageForm extends React.Component {
       headers: HEADERS,
       body: JSON.stringify({
         content: this.state.content,
-        chat_id: 1,
+        chat_id: this.props.chatId,
         user_id: 1
       })
     });
