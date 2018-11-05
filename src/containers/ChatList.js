@@ -23,6 +23,7 @@ class ChatList extends Component {
   };
 
   render() {
+    console.log(this.props.chats);
     return (
       <React.Fragment>
 

@@ -8,16 +8,23 @@ import { connect } from 'react-redux'
 class Chatroom extends Component {
 
   handleReceivedMessage = response => {
-    console.log(response);
     const { message } = response;
     let chat = {...this.props.activeChat}
     chat.messages = [...chat.messages, message];
     this.props.addMessage(chat);
   };
 
+  handleReceivedSubscription = response => {
+    console.log(response);
+    const { user } = response
+    let chat = {...this.props.activeChat}
+    chat.users = [...chat.users, user];
+    this.props.addMessage(chat)
+  }
+
   render() {
-    // console.log(this.props.activeChat);
-    // console.log(this.props.activeChat.messages)
+    console.log(this.props.activeChat);
+    console.log(this.props.activeChat.users)
     // console.log(this.props.chat.messages)
     return (
       <div>
@@ -25,6 +32,10 @@ class Chatroom extends Component {
         channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.id}}
         onReceived={this.handleReceivedMessage}
         />
+      <ActionCable
+        channel={{ channel: 'SubscriptionsChannel', chat: this.props.activeChat.id }}
+        onReceived={this.handleReceivedSubscription}
+      />
         <Message messages={this.props.activeChat.messages}/>
         <NewMessageForm chatId={this.props.activeChat.id}/>
         <Joiners joiners={this.props.activeChat.users}/>

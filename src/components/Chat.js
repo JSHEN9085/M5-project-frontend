@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import {Button, Image} from 'semantic-ui-react';
 import { connect } from 'react-redux'
 // import { NavLink } from "react-router-dom"; user NavLink if going to a specfic address without params
-
-
+import {API_ROOT, HEADERS} from '../constants/index'
 import '../index.css'
 
 
@@ -11,6 +10,15 @@ class Chat extends Component {
 
   handleSelect = (event) => {
     this.props.selectChat(this.props.chat)
+    fetch(`${API_ROOT}/chats/${this.props.chat.id}/subscriptions`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({
+        user_id: 4, //need to change to current user id
+        chat_id: this.props.chat.id
+      })
+    })
+
     this.props.history.push(`/chats/${this.props.chat.id}`)
   }
 
@@ -33,15 +41,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(null, mapDispatchToProps)(Chat);
-
-// <Fragment>
-//   {props.chats.map(chat => {
-//     return (
-//       <ActionCable
-//         key={chat.id}
-//         channel={{ channel: 'MessagesChannel', chat: chat.id }}
-//         onReceived={props.handleReceivedMessage}
-//       />
-//     );
-//   })}
-// </Fragment>

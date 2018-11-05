@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 // import Background0 from '../Img/bg-00.gif'
 // import { Card, Image, Button } from 'semantic-ui-react'
 import Video from '../Img/typing.mp4'
+import { NavLink } from 'react-router-dom';
 
 class Home extends Component {
 
@@ -16,12 +17,16 @@ class Home extends Component {
         <center className="app-name">
           Flatiron RealTime Forum
           <div className="home-button">
-            <button className="massive ui primary button">
-              Log In
-            </button>
-            <button className="massive ui secondary button">
-              Sign Up
-            </button>
+            <NavLink to="/login" >
+              <button className="massive ui primary button">
+                Log In
+              </button>
+            </NavLink>
+            <NavLink to="/signup" >
+              <button className="massive ui secondary button">
+                Sign Up
+              </button>
+            </NavLink>
             </div>
         </center>
         <video id="background-video" loop autoPlay>
