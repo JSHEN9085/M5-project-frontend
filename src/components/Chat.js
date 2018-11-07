@@ -10,14 +10,14 @@ class Chat extends Component {
 
   handleSelect = (event) => {
     this.props.selectChat(this.props.chat)
-    fetch(`${API_ROOT}/chats/${this.props.chat.id}/subscriptions`, {
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify({
-        user_id: 4, //need to change to current user id
-        chat_id: this.props.chat.id
-      })
-    })
+    // fetch(`${API_ROOT}/chats/${this.props.chat.id}/subscriptions`, {
+    //   method: "POST",
+    //   headers: HEADERS,
+    //   body: JSON.stringify({
+    //     user_id: 4, //need to change to current user id
+    //     chat_id: this.props.chat.id
+    //   })
+    // })
 
     this.props.history.push(`/chats/${this.props.chat.id}`)
   }

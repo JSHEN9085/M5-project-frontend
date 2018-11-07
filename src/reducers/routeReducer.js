@@ -1,9 +1,22 @@
 export default function routerReducer(state = {
-  currentUser: {},
+  currentUser: null,
+  loggedIn: false,
+  authenticatingUser: false,
+  failedLogin: false,
+  error: false,
   chats: [],
   activeChat: null,
 }, action) {
   switch(action.type) {
+
+    case 'SET_CURRENT_USER':
+      return {...state, currentUser: action.payload, loggedIn: true, authenticatingUser: false}
+
+    case 'AUTHENTICATING_USER':
+      return { ...state, authenticatingUser: true }
+
+    case 'AUTHENTICATED_USER':
+      return { ...state, authenticatingUser: false }
 
     case 'INITIAL_STATE':
       return {...state, chats: [...state.chats].concat(action.chats)}

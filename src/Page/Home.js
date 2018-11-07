@@ -6,44 +6,48 @@ import React, { Component } from 'react';
 // import Background3 from '../Img/bg-3.jpg'
 // import Background0 from '../Img/bg-00.gif'
 // import { Card, Image, Button } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 import Video from '../Img/typing.mp4'
-import { NavLink } from 'react-router-dom';
+import Login from '../components/Login'
+import SignUp from '../components/SignUp'
 
 class Home extends Component {
 
   render() {
     return (
-      <div className="home-page">
-        <center className="app-name">
+      <React.Fragment>
+        <div className="app-name">
           Flatiron RealTime Forum
-          <div className="home-button">
-            <NavLink to="/login" >
-              <button className="massive ui primary button">
+        </div>
+
+          <div className="home-login-button">
+            <Modal trigger={<button className="massive ui primary button" name="login">
                 Log In
-              </button>
-            </NavLink>
-            <NavLink to="/signup" >
-              <button className="massive ui secondary button">
+              </button>}>
+              <Login history={this.props.history}/>
+            </Modal>
+          </div>
+
+          <div className="home-signup-button">
+            <Modal trigger={<button className="massive ui secondary button" name="signup">
                 Sign Up
-              </button>
-            </NavLink>
-            </div>
-        </center>
+              </button>}>
+              <SignUp history={this.props.history}/>
+              </Modal>
+          </div>
+
         <video id="background-video" loop autoPlay>
           <source src={Video} type="video/mp4" />
           <source src={Video} type="video/ogg" />
         </video>
 
-      </div>
+      </React.Fragment>
     );
   }
 }
 
 export default Home;
-
-
-
-
 // <BackgroundSlideshow
 //   images={[ Background1, Background2, Background3 ]}
 //   animationDelay={4000}/>
+// sylvain.david@example.com

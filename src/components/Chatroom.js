@@ -3,6 +3,7 @@ import { ActionCable } from 'react-actioncable-provider';
 import Message from './Message'
 import NewMessageForm from './NewMessageForm'
 import Joiners from './Joiners'
+import Navbar from './Navbar'
 import { connect } from 'react-redux'
 
 class Chatroom extends Component {
@@ -27,19 +28,22 @@ class Chatroom extends Component {
     console.log(this.props.activeChat.users)
     // console.log(this.props.chat.messages)
     return (
-      <div>
-      <ActionCable
-        channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.id}}
-        onReceived={this.handleReceivedMessage}
+      <React.Fragment>
+        <Navbar/>
+        <div>
+        <ActionCable
+          channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.id}}
+          onReceived={this.handleReceivedMessage}
+          />
+        <ActionCable
+          channel={{ channel: 'SubscriptionsChannel', chat: this.props.activeChat.id }}
+          onReceived={this.handleReceivedSubscription}
         />
-      <ActionCable
-        channel={{ channel: 'SubscriptionsChannel', chat: this.props.activeChat.id }}
-        onReceived={this.handleReceivedSubscription}
-      />
-        <Message messages={this.props.activeChat.messages}/>
-        <NewMessageForm chatId={this.props.activeChat.id}/>
-        <Joiners joiners={this.props.activeChat.users}/>
-      </div>
+          <Message messages={this.props.activeChat.messages}/>
+          <NewMessageForm chatId={this.props.activeChat.id}/>
+          <Joiners joiners={this.props.activeChat.users}/>
+        </div>
+      </React.Fragment>
     );
   }
 

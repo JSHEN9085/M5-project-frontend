@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react';
 import {API_ROOT} from '../constants/index'
 import { connect } from 'react-redux';
 import NewChatForm from '../components/NewChatForm';
-// import Chat from '../components/Chat';
+import Navbar from '../components/Navbar';
 import Message from '../components/Message'
 import ChatList from '../containers/ChatList'
 import Chatroom from '../components/Chatroom'
@@ -41,6 +41,8 @@ class MainPage extends Component {
   render() {
     return (
       <React.Fragment>
+
+        <Navbar/>
 
         <div className="ui segment violet inverted">
           <h2>Flatiron RealTime Forum</h2>

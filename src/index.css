@@ -11,28 +11,28 @@ opacity: 0.8;
   position: absolute;
   font-size: 90pt;
   margin-top: 230px;
-  /* text-align: center; */
   color: white;
   z-index: 3;
-  left: 17%;
+  box-sizing: border-box;
+  margin-left: 17%;
 }
 
-.home-button {
-  position: absolute;
-  margin-top: 80px;
-  left: 40%;
-}
-
-#root > div > button {
+#root > div.home-login-button > button {
   position: absolute;
   z-index: 3;
+  margin-top: 20%;
+  left: 35%;
+  width: 170px;
 }
 
-#root > div > div > button.ui.secondary.button {
-  /* margin-left: 100px;
-  left: 60%; */
-  /* margin: 0,0,0,40px; */
+#root > div.home-signup-button > button {
+  position: absolute;
+  z-index: 3;
+  margin-top: 20%;
+  left: 55%;
+  width: 170px;
 }
+
 
 /*Navbar style*/
 #Navbar {
@@ -41,14 +41,29 @@ opacity: 0.8;
   font-size: 15pt;
 }
 
-#user-name {
+/* #user-name {
   text-align: center;
   font-size: 20pt;
   border-bottom-color: transparent;
   border-bottom-style: solid;
   border-radius: 0;
   align-self: flex-end;
-  margin-left: 330px;
+  margin-left: 25%;
+  left: 30%;
+  padding: .85714286em 1.14285714em;
+  border-bottom-width: 2px;
+  -webkit-transition: color .1s ease;
+  transition: color .1s ease;
+} */
+/* id="user-name" */
+
+#Navbar > div.item.active.user {
+  text-align: center;
+  font-size: 20pt;
+  border-bottom-color: transparent;
+  border-bottom-style: solid;
+  border-radius: 0;
+  align-self: flex-end;
   padding: .85714286em 1.14285714em;
   border-bottom-width: 2px;
   -webkit-transition: color .1s ease;
@@ -57,6 +72,62 @@ opacity: 0.8;
 
 /* SignUpLogIn Style */
 
+/* Login Style */
+.Form {
+  color: #080e20;
+}
+
+.login-form {
+  position: absolute;
+  margin-left: 15%;
+  margin-top: -18%;
+}
+
+body {
+  text-align: center;
+}
+
+.login {
+  display: inline-block;
+  width: 650px;
+  height: 500px;
+  padding: 60px 15px;
+  border: solid #152249 2px;
+  border-radius: 10px;
+  background-color: #1c2c5b;
+  font-family: "Niramit", sans-serif;
+  z-index: 3;
+  position: absolute;
+}
+
+.log {
+  margin: 0 135px 20px 135px;
+  color: white;
+  font-family: "Niramit", sans-serif;
+  font-size: 65px;
+  text-align: center;
+  z-index: 3;
+}
+
+.submit {
+  margin: 200px;
+  color: #080e20;
+  font-family: "Niramit", sans-serif;
+  z-index: 3;
+}
+
+.signup {
+  display: inline-block;
+  width: 650px;
+  height: 500px;
+  padding: 60px 15px;
+  border: solid #152249 2px;
+  border-radius: 10px;
+  background-color: #1b1c1d;
+  font-family: "Niramit", sans-serif;
+  z-index: 3;
+  position: absolute;
+}
 
 /* MainPage Style */
 .ui.segment.violet.inverted {
@@ -79,4 +150,53 @@ opacity: 0.8;
 
 #root > table > tbody > tr > td.join-btn {
   text-align: center;
+}
+
+/* Message Area */
+
+.messagesArea {
+  flex-direction: column-reverse;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  width: 50%;
+  height: 50%;
+  border: 1px solid lightgray;
+  font-size: 20px;
+  overflow-y: scroll;
+  /* background-color: #d5dbdb */
+}
+
+
+/* MessageForm Style */
+.message-input {
+  position: absolute;
+  margin-top: 30%;
+  left: 15%;
+  width: 50%;
+  height: 10%;
+  border: 1px solid lightgray;
+  font-size: 20px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  background-color: #d5dbdb;
+  transition: all 0.3s ease 0s;
+  }
+
+/* Joiner Style */
+.joiner-list {
+  position: absolute;
+  border: 1px solid lightgray;
+  top: 20%;
+  right: 15%;
+  width: 20%;
+  height: 63%;
+  font-size: 20px;
+  overflow-y: scroll;
+}
+
+.joiner {
+  margin-top: 10px;
 }

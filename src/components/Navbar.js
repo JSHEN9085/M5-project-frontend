@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
+import { connect } from 'react-redux';
 
-const Navbar = (props) => {
-  return (
-    <div className="ui secondary pointing menu" id="Navbar">
-      <a className="item active">
-        Friends
-      </a>
-      <a className="item">
-        Events
-      </a>
-      <div className="" id="user-name">
-        Welcome Back Jun
-      </div>
-      <div className="right menu">
-        <a className="ui item">
-          Logout
+class Navbar extends Component {
+  render () {
+    return (
+      <div className="ui secondary pointing menu" id="Navbar">
+        <a href="http://localhost:3001/mainpage" className="item active">
+          Home
         </a>
+        <a className="item active">
+          Friendship
+        </a>
+        <div className="item right active user">
+          Welcome Back
+        </div>
+        <div className="right menu" >
+          <a href="http://localhost:3001" className="ui item">
+            Logout
+          </a>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 };
 
 export default Navbar;

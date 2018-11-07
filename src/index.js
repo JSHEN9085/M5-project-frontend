@@ -8,21 +8,18 @@ import { API_WS_ROOT } from './constants';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import routeReducer from './reducers/routeReducer';
-import SignUp from './components/SignUp'
-import Login from './components/Login'
 import MainPage from './Page/MainPage'
 import Chatroom from './components/Chatroom'
-import { persistStore, persistReducer } from 'redux-persist';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <React.Fragment>
         <Route exact path="/" component={App} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/login" component={Login} />
         <Route exact path="/mainpage" component={MainPage} />
         <Route exact path="/chats/:id" component={Chatroom} />
       </React.Fragment>
@@ -30,7 +27,7 @@ const Root = ({ store }) => (
     </Provider>
 )
 
-const store = createStore(routeReducer)
+const store = createStore(routeReducer, composeWithDevTools(applyMiddleware(thunk)))
 Root.propTypes = {
   store: PropTypes.object.isRequired
 }
