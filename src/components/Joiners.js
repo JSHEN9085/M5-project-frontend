@@ -9,10 +9,10 @@ class Joiners extends Component {
   }
 
   render () {
-    console.log(this.props.joiners);
+    // console.log(this.props.joiners);
     return (
       <div className="joiner-list">
-        {this.props.joiners.map(joiner => <div className="joiner"><Image avatar src={joiner.small_picture}/> {joiner.firstname}</div>)}
+        {this.props.joiners.map(joiner => <div className="joiner" key={joiner.id}><Image avatar src={joiner.small_picture}/> {joiner.firstname}</div>)}
       </div>
     )
   }

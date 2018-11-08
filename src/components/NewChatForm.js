@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class NewChatForm extends React.Component {
   state = {
     topic: '',
-    creator_id: 5   //this need to be changed to current user's ID
+    creator_id: this.props.user.user.id   //this need to be changed to current user's ID
   };
 
   handleChange = e => {
@@ -40,4 +40,7 @@ class NewChatForm extends React.Component {
   };
 }
 
-export default NewChatForm;
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+
+export default connect(mapStateToProps)(NewChatForm);

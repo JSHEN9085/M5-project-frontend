@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import '../index.css'
 
 class ChatList extends Component {
-
   // handleReceivedMessage = response => {
   //   const { message } = response;
   //   const chats = [...this.props.chats];
@@ -23,7 +22,7 @@ class ChatList extends Component {
   };
 
   render() {
-    console.log(this.props.chats);
+    // console.log(this.props);
     return (
       <React.Fragment>
 
@@ -58,7 +57,7 @@ class ChatList extends Component {
                 </h3>
               </th>
             </tr>
-            {this.props.chats.map(chat => <Chat key={chat.id} chat={chat} history={this.props.history}/>)}
+            {this.props.chats.chats.map(chat => <Chat key={chat.id} chat={chat} history={this.props.history}/>)}
           </tbody>
         </table>
       </React.Fragment>
@@ -67,7 +66,7 @@ class ChatList extends Component {
 
 }
 
-const mapStateToProps = ( {chats}) => ({ chats })
+const mapStateToProps = ( {chatsReducer: chats}) => ({ chats })
 
 const mapDispatchToProps = dispatch => ({
   addChat: chat => dispatch({type: "ADD_CHAT", chat})

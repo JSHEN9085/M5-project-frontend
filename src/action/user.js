@@ -16,6 +16,7 @@ export const loginUser = (email, password) => {
       })
     }).then(response => {
       if (response.ok) {
+        console.log(response);
         return response.json()
       } else {
         throw response
@@ -32,14 +33,17 @@ export const fetchCurrentUser = () => {
   // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
     dispatch(authenticatingUser()) //tells the app we are fetching
-    fetch(`${API_ROOT}/users`, {
+    fetch(`${API_ROOT}/profile`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('jwt')}`
       }
     })
       .then(response => response.json())
-      .then((JSONResponse) => dispatch(setCurrentUser(JSONResponse.user)))
+      .then((JSONResponse) => {
+        dispatch(setCurrentUser(JSONResponse.user))
+      }
+    )
   }
 }
 

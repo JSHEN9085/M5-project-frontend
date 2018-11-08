@@ -29,7 +29,6 @@ class Login extends Component {
     event.preventDefault()
     this.setState({email: "", password: ""})
     this.props.loginUser(this.state.email, this.state.password)
-    this.props.history.push("/mainpage");
   };
 
   render() {
@@ -109,7 +108,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ authenticatingUser, failedLogin, error, loggedIn, currentUser }) => ({
+const mapStateToProps = ({ usersReducer: {authenticatingUser, failedLogin, error, loggedIn, currentUser } }) => ({
   authenticatingUser,
   failedLogin,
   error,

@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Message from '../components/Message'
 import ChatList from '../containers/ChatList'
 import Chatroom from '../components/Chatroom'
+import { Redirect } from 'react-router';
 
 
 class MainPage extends Component {
@@ -17,9 +18,14 @@ class MainPage extends Component {
   }
 
   componentDidMount () {
-    fetch(`${API_ROOT}/chats`)
+    fetch(`${API_ROOT}/chats`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`
+      }
+    })
     .then(r => r.json())
-    .then(chats => this.props.initialState(chats) )
+    .then(chats => this.props.initialChats(chats) )
   }
 
   handleCreate = (event) => {
@@ -40,38 +46,41 @@ class MainPage extends Component {
 
   render() {
     return (
-      <React.Fragment>
+        <React.Fragment>
 
-        <Navbar/>
+          <Navbar/>
 
-        <div className="ui segment violet inverted">
-          <h2>Flatiron RealTime Forum</h2>
-        </div>
+          <div className="ui segment violet inverted">
+            <h2>Flatiron RealTime Forum</h2>
+          </div>
 
-        <div className="ui huge fluid icon input">
-          <input
-            type="text"
-            placeholder={"Search by Topic"}
-          />
-          <i className="circular search link icon"></i>
-        </div>
+          <div className="ui huge fluid icon input">
+            <input
+              type="text"
+              placeholder={"Search by Topic"}
+            />
+            <i className="circular search link icon"></i>
+          </div>
 
-        <Button onClick={this.handleCreate} > Create New Chat </Button>
+          <Button onClick={this.handleCreate} > Create New Chat </Button>
 
-        {this.state.createNewChat? <NewChatForm /> : null}
+          {this.state.createNewChat? <NewChatForm /> : null}
 
-        <ChatList history={this.props.history}/>
+          <ChatList history={this.props.history}/>
 
-      </React.Fragment>
+        </React.Fragment>
     );
   }
 }
 
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+
 const mapDispatchToProps = dispatch => ({
-  initialState: chats => dispatch({type: "INITIAL_STATE", chats}),
+  initialChats: chats => dispatch({type: "INITIAL_CHATS", chats}),
 })
 
-export default connect(null, mapDispatchToProps) (MainPage);
+export default connect(mapStateToProps, mapDispatchToProps) (MainPage);
 
 
 

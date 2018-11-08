@@ -10,14 +10,14 @@ class Chat extends Component {
 
   handleSelect = (event) => {
     this.props.selectChat(this.props.chat)
-    // fetch(`${API_ROOT}/chats/${this.props.chat.id}/subscriptions`, {
-    //   method: "POST",
-    //   headers: HEADERS,
-    //   body: JSON.stringify({
-    //     user_id: 4, //need to change to current user id
-    //     chat_id: this.props.chat.id
-    //   })
-    // })
+    fetch(`${API_ROOT}/chats/${this.props.chat.id}/subscriptions`, {
+      method: "POST",
+      headers: HEADERS,
+      body: JSON.stringify({
+        user_id: this.props.user.user.id, //need to change to current user id
+        chat_id: this.props.chat.id
+      })
+    })
 
     this.props.history.push(`/chats/${this.props.chat.id}`)
   }
@@ -36,8 +36,10 @@ class Chat extends Component {
   };
 }
 
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
 const mapDispatchToProps = dispatch => ({
   selectChat: chat => dispatch({type: "SELECT_CHAT", chat})
 })
 
-export default connect(null, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

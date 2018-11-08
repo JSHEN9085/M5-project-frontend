@@ -2,11 +2,11 @@ import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import { connect } from 'react-redux';
 
 class NewMessageForm extends React.Component {
   state = {
     content: '',
-    user_id: 1
   };
 
   // componentWillReceiveProps = nextProps => {
@@ -46,14 +46,14 @@ class NewMessageForm extends React.Component {
       body: JSON.stringify({
         content: this.state.content,
         chat_id: this.props.chatId,
-        user_id: 1
+        user_id: this.props.user.user.id
       })
     });
     this.setState({ content: '' });
   };
 
   render = () => {
-    console.log(this.state.chat_id)
+    console.log(this.props)
     return (
       <div className="message-input-container">
         <form onSubmit={this.handleSubmit}>
@@ -64,13 +64,14 @@ class NewMessageForm extends React.Component {
             onChange={this.handleChange}
           />
         </form>
-
       </div>
     );
   };
 }
 
-export default NewMessageForm;
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+export default connect(mapStateToProps)(NewMessageForm);
 
 // <span>
 //   <Picker onSelect={this.addEmoji} />

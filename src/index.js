@@ -11,7 +11,9 @@ import PropTypes from 'prop-types';
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import routeReducer from './reducers/routeReducer';
+import { combineReducers } from "redux";
+import chatsReducer from './reducers/chatsReducer';
+import usersReducer from './reducers/usersReducer';
 import MainPage from './Page/MainPage'
 import Chatroom from './components/Chatroom'
 
@@ -27,7 +29,10 @@ const Root = ({ store }) => (
     </Provider>
 )
 
-const store = createStore(routeReducer, composeWithDevTools(applyMiddleware(thunk)))
+const rootReducer = combineReducers({ usersReducer, chatsReducer }) //TODO: move this too
+
+
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 Root.propTypes = {
   store: PropTypes.object.isRequired
 }
