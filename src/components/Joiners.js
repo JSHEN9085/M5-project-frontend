@@ -1,21 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {Button, Image} from 'semantic-ui-react';
 import { ActionCable } from 'react-actioncable-provider';
+import Flatiron from '../Img/userSmall.jpg'
 
-class Joiners extends Component {
-
-  handleReceivedSubscription = response => {
-    console.log(response);
-  }
-
-  render () {
-    // console.log(this.props.joiners);
+const Joiners = (props) => {
     return (
       <div className="joiner-list">
-        {this.props.joiners.map(joiner => <div className="joiner" key={joiner.id}><Image avatar src={joiner.small_picture}/> {joiner.firstname}</div>)}
+          {props.joiners.map(joiner => (
+            <div className="joiner" key={joiner.id} joiner={joiner}>
+              {joiner.small_picture ? <Image avatar src={joiner.small_picture} /> : <Image avatar src={Flatiron}/>}
+              {joiner.firstname} {joiner.lastname}
+            </div>))}
       </div>
     )
-  }
 };
 
 export default Joiners;

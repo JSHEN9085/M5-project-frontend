@@ -9,10 +9,6 @@ class NewMessageForm extends React.Component {
     content: '',
   };
 
-  // componentWillReceiveProps = nextProps => {
-  //   this.setState({ chat_id: nextProps.chat_id });
-  // };
-
   handleChange = e => {
     this.setState({ content: e.target.value });
   };
@@ -52,7 +48,7 @@ class NewMessageForm extends React.Component {
     this.setState({ content: '' });
   };
 
-  render = () => {
+  render () {
     console.log(this.props)
     return (
       <div className="message-input-container">

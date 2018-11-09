@@ -15,7 +15,7 @@ import { combineReducers } from "redux";
 import chatsReducer from './reducers/chatsReducer';
 import usersReducer from './reducers/usersReducer';
 import MainPage from './Page/MainPage'
-import Chatroom from './components/Chatroom'
+import Chatroom from './containers/Chatroom'
 
 const Root = ({ store }) => (
   <Provider store={store}>

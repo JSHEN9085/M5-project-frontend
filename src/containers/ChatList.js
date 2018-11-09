@@ -6,15 +6,6 @@ import { connect } from 'react-redux';
 import '../index.css'
 
 class ChatList extends Component {
-  // handleReceivedMessage = response => {
-  //   const { message } = response;
-  //   const chats = [...this.props.chats];
-  //   const chat = chats.find(
-  //     chat => chat.id === message.chat_id
-  //   );
-  //   chat.messages = [...chat.messages, message];
-  //   this.setState({ chats });
-  // };
 
   handleReceivedChat = response => {
     const { chat } = response;
@@ -22,7 +13,6 @@ class ChatList extends Component {
   };
 
   render() {
-    // console.log(this.props);
     return (
       <React.Fragment>
 

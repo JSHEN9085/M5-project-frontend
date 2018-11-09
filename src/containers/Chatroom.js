@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import { ActionCable } from 'react-actioncable-provider';
 import { API_ROOT, HEADERS } from '../constants';
-import Message from './Message'
-import NewMessageForm from './NewMessageForm'
-import Joiners from './Joiners'
-import Navbar from './Navbar'
+import Message from '../components/Message'
+import NewMessageForm from '../components/NewMessageForm'
+import Joiners from '../components/Joiners'
+import Navbar from '../components/Navbar'
 import { connect } from 'react-redux'
+import Messages from '../components/Messages'
 
 class Chatroom extends Component {
 
-  componentDidMount () {
+  componentDidMount(){
     console.log(this.props.match.params.id)
+    let targetChat
     fetch(`${API_ROOT}/chats/${this.props.match.params.id}`)
     .then(r => r.json())
-    .then(chat => this.props.selectChat(chat))
+    .then(chat => {
+      fetch(`${API_ROOT}/chats/${this.props.match.params.id}/messages`)
+      .then(r => r.json())
+      .then(messages => {
+        chat.messages = messages
+        this.props.selectChat(chat)
+      })
+    })
   }
 
   handleReceivedMessage = response => {
     const { message } = response;
-    console.log(response);
-    let chat = {...this.props.activeChat.activeChat}
+    let chat = {...this.props.activeChat.activeChat};
     chat.messages = [...chat.messages, message];
     this.props.addMessage(chat);
   };
@@ -39,14 +47,10 @@ class Chatroom extends Component {
   }
 
   render() {
-    // console.log(this.props);
-    // console.log(this.props.activeChat.activeChat)
-    console.log(this.props.match.params.id);
-    const testingChat =  this.props.activeChat.activeChat?  this.props.activeChat.activeChat.id : console.log("nothing")
     return (
       <React.Fragment>
         <Navbar/>
-        {  this.props.activeChat.activeChat &&  <div>
+         {this.props.activeChat.activeChat && <div className="chatroom">
             <ActionCable
               channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.activeChat.id}}
               onReceived={this.handleReceivedMessage}
@@ -55,12 +59,10 @@ class Chatroom extends Component {
               channel={{ channel: 'SubscriptionsChannel', chat: this.props.activeChat.activeChat.id }}
               onReceived={this.handleReceivedSubscription}
             />
-              <Message messages={this.props.activeChat.activeChat.messages}/>
-              <NewMessageForm chatId={this.props.activeChat.activeChat.id}/>
-              <Joiners joiners={this.props.activeChat.activeChat.users}/>
-            </div>
-          }
-
+          <Messages />
+          <Joiners joiners={this.props.activeChat.activeChat.users}/>
+          </div>
+        }
       </React.Fragment>
     );
   }
@@ -77,3 +79,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps) (Chatroom);
 
 // {this.props.chat.messages.map(message => message.content)}
+// <Message messages={this.props.activeChat.activeChat.messages}/>
+// <NewMessageForm chatId={this.props.activeChat.activeChat.id}/>
+// <Joiners joiners={this.props.activeChat.activeChat.users}/>

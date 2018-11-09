@@ -47,6 +47,7 @@ class Home extends Component {
 }
 
 export default Home;
+
 // <BackgroundSlideshow
 //   images={[ Background1, Background2, Background3 ]}
 //   animationDelay={4000}/>

@@ -8,7 +8,7 @@ import {API_ROOT, HEADERS} from '../constants/index'
 class Navbar extends Component {
 
   componentDidMount() {
-   if (localStorage.getItem('jwt')&&!this.props.user.loggedIn) {
+   if (localStorage.getItem('jwt') && !this.props.user.loggedIn) {
      this.props.fetchCurrentUser()
    }
  }
@@ -32,6 +32,19 @@ class Navbar extends Component {
     }
   }
 
+  currentUserName = () => {
+    let date = new Date();
+    if (date.getHours() >= 0 && date.getHours() < 7) {
+      return `It is time to sleep ${this.props.user.user.firstname}`
+    } else if (date.getHours() >= 7 && date.getHours() < 12) {
+        return `Good Morning ${this.props.user.user.firstname}`
+    } else if (date.getHours() >= 12 && date.getHours() < 18){
+        return `Good Afternoon ${this.props.user.user.firstname}`
+    } else {
+      return `Good Evening ${this.props.user.user.firstname}`
+    }
+  }
+
 
   render () {
     return (
@@ -42,10 +55,10 @@ class Navbar extends Component {
           <a className="item active">
             Friendship
           </a>
-          <div className="item right active user">
-            Welcome Back
-          </div>
           <div className="right menu" >
+            <div className="ui item">
+              {this.props.user.user ? this.currentUserName() : null}
+            </div>
             <a href="http://localhost:3001" className="ui item" onClick={this.handleLogout}>
               Logout
             </a>
