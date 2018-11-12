@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
 import { connect } from 'react-redux';
-import withAuth from '../hocs/withAuth'
 import {fetchCurrentUser} from '../action/user'
 import {API_ROOT, HEADERS} from '../constants/index'
 
@@ -21,7 +20,7 @@ class Navbar extends Component {
   handleUnsubscribe = (event) => {
     if (this.props.chats.activeChat) {
       const chatId = this.props.chats.activeChat.id
-      fetch(`http://localhost:3000/chats/${chatId}/subscriptions/delete`, {
+      fetch(`${API_ROOT}/chats/${chatId}/subscriptions/delete`, {
         method: "DELETE",
         headers: HEADERS,
         body: JSON.stringify({

@@ -3,7 +3,8 @@ const defaultState = {
   loggedIn: false,
   authenticatingUser: false,
   failedLogin: false,
-  error: null
+  error: null,
+  onBreak: false
 }
 
 const usersReducer = /*FUNCTION*/ (state=defaultState, action) => {
@@ -14,14 +15,21 @@ const usersReducer = /*FUNCTION*/ (state=defaultState, action) => {
       return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false }
     case 'AUTHENTICATING_USER': //tells the app we're fetching
       return { ...state, authenticatingUser: true }
+
     case 'AUTHENTICATED_USER':
       return { ...state, authenticatingUser: false }
+
     case 'FAILED_LOGIN': //for error handling
       return {
         ...state,
         failedLogin: true,
         error: action.payload,
         authenticatingUser: false
+      }
+
+    case 'CHANGE_BREAK_MODE':
+      return {...state,
+        onBreak: !state.onBreak
       }
 
     case 'LOG_OUT':

@@ -5,16 +5,13 @@ import {API_ROOT} from '../constants/index'
 import { connect } from 'react-redux';
 import NewChatForm from '../components/NewChatForm';
 import Navbar from '../components/Navbar';
-import Message from '../components/Message'
 import ChatList from '../containers/ChatList'
-import Chatroom from '../containers/Chatroom'
-import { Redirect } from 'react-router';
 
 
 class MainPage extends Component {
 
   state = {
-    modalOpen: false
+    modalOpen: false,
   }
 
   componentDidMount () {
@@ -28,19 +25,19 @@ class MainPage extends Component {
     .then(chats => this.props.initialChats(chats) )
   }
 
-  // handleReceivedMessage = response => {
-  //   const { message } = response;
-  //   const chats = [...this.state.chats];
-  //   const chat = chats.find(
-  //     chat => chat.id === message.chat_id
-  //   );
-  //   chat.messages = [...chat.messages, message];
-  //   this.setState({ chats });
-  // };
-
   handleOpen = () => this.setState({ modalOpen: true })
 
   handleClose = () => this.setState({ modalOpen: false })
+
+  handleSearch = (event) => {
+    let originalChats = this.props.chats.initialChats;
+      if (event.target.value === ""){
+        this.props.filterChats(originalChats)
+      } else {
+        let filteredChats = originalChats.filter(chat => chat.topic.toLowerCase().includes(event.target.value.toLowerCase()))
+        this.props.filterChats(filteredChats)
+      }
+  }
 
   render() {
     return (
@@ -56,6 +53,7 @@ class MainPage extends Component {
             <input
               type="text"
               placeholder={"Search by Topic"}
+              onChange={this.handleSearch}
             />
             <i className="circular search link icon"></i>
           </div>
@@ -75,11 +73,12 @@ class MainPage extends Component {
   }
 }
 
-const mapStateToProps = ({ usersReducer: user }) => ({ user })
+const mapStateToProps = ({ usersReducer: user, chatsReducer: chats }) => ({ user, chats })
 
 
 const mapDispatchToProps = dispatch => ({
   initialChats: chats => dispatch({type: "INITIAL_CHATS", chats}),
+  filterChats: chats => dispatch({type: "FILTER_CHATS", chats})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps) (MainPage);

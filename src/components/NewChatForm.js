@@ -1,7 +1,7 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
 import { connect } from 'react-redux';
-import {Button, Form, Segment, Modal, Message} from 'semantic-ui-react';
+import {Button, Form, Segment} from 'semantic-ui-react';
 
 class NewChatForm extends React.Component {
   state = {

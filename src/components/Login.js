@@ -5,8 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import {API_ROOT, HEADERS} from '../constants/index'
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router';
 import { loginUser } from '../action/user'

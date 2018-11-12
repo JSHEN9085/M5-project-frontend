@@ -1,7 +1,6 @@
 import React from 'react';
 import { API_ROOT, HEADERS } from '../constants';
 import 'emoji-mart/css/emoji-mart.css';
-import { Picker } from 'emoji-mart';
 import { connect } from 'react-redux';
 
 class NewMessageForm extends React.Component {

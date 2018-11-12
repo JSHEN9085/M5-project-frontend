@@ -9,11 +9,39 @@ class Messages extends Component {
 
   state = {
     content: '',
+    openEmoji: false
   };
 
   handleChange = e => {
     this.setState({ content: e.target.value });
   };
+
+  handleShowEmoji = (e) => {
+    this.setState({
+      openEmoji: !this.state.openEmoji
+    })
+  }
+
+
+  addEmoji = (e) => {
+    console.log(e.unified)
+    if (e.unified.length <= 5){
+      let emojiPic = String.fromCodePoint(`0x${e.unified}`)
+      this.setState({
+        content: this.state.content + emojiPic
+      })
+    }else {
+      let sym = e.unified.split('-')
+      let codesArray = []
+      sym.forEach(el => codesArray.push('0x' + el))
+      //console.log(codesArray.length)
+      //console.log(codesArray)  // ["0x1f3f3", "0xfe0f"]
+      let emojiPic = String.fromCodePoint(...codesArray)
+      this.setState({
+        content: this.state.content + emojiPic
+      })
+    }
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -32,12 +60,13 @@ class Messages extends Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div className="wrapper" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}>
         <div className="main-container">
 
-          <div className="message-area">
+          <div className="message-area" >
             {this.props.chats.activeChat.messages.length ? this.props.chats.activeChat.messages.map(message => <Message key={message.id} message={message}/> ) : null}
           </div>
+
 
           <div className="enter-area">
             <form onSubmit={this.handleSubmit}>
@@ -49,8 +78,15 @@ class Messages extends Component {
                 value={this.state.content}
                 onChange={this.handleChange}
                 />
+              <p style={{cursor: 'pointer'}} className="emoji-button" onClick={this.handleShowEmoji} >
+                  {String.fromCodePoint(0x1f60a)}
+                </p>
               <input type="submit" id="message-send"/>
             </form>
+          </div>
+
+          <div >
+            {this.state.openEmoji ? <Picker onSelect={this.addEmoji} className="emoji"/> : null}
           </div>
 
         </div>

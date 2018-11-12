@@ -1,5 +1,4 @@
 /* Homepage Style */
-
 #background-video{
 height: 100%;
 width: 100%;
@@ -41,22 +40,31 @@ opacity: 0.8;
   /* margin-top: 20px; */
   background-color: #454c55;
   font-size: 15pt;
+  z-index: 10;
 }
 
 #Navbar > a:nth-child(1) {
-  color: white
+  color: white;
+  z-index: 4;
+  border-bottom-color: transparent;
+  border-bottom-style: solid;
 }
 
 #Navbar > a:nth-child(2) {
-  color: white
+  color: white;
+  z-index: 4;
+  border-bottom-color: transparent;
+  border-bottom-style: solid;
 }
 
 #Navbar > div > a {
-  color: white
+  color: white;
+  z-index: 4;
 }
 
 #Navbar > div > div {
   color: white;
+  z-index: 4;
 }
 
 #Navbar > div.item.active.user {
@@ -70,6 +78,7 @@ opacity: 0.8;
   border-bottom-width: 2px;
   -webkit-transition: color .1s ease;
   transition: color .1s ease;
+  z-index: 4;
 }
 
 /* SignUpLogIn Style */
@@ -154,10 +163,6 @@ opacity: 0.8;
 }
 
 /* chatroom style */
-.chatroom {
-  background-color: lightBlue;
-  z-index: 5;
-}
 
 /* newChatForm */
 .new-chat-form {
@@ -174,24 +179,12 @@ opacity: 0.8;
   text-align: center;
 }
 
-.chat {
-  font-size: 14pt;
+#root > table > tbody > tr > td.updated-time {
+  text-align: center;
 }
 
-/* Message Area */
-
-
-.messages-area {
-  flex-direction: column-reverse;
-  position: absolute;
-  top: 20%;
-  left: 15%;
-  width: 50%;
-  height: 50%;
-  border: 1px solid lightgray;
-  font-size: 20px;
-  overflow-y: scroll;
-  background-color: #d5dbdb
+.chat {
+  font-size: 14pt;
 }
 
 
@@ -235,19 +228,24 @@ opacity: 0.8;
   height: 750px;
   font-size: 20px;
   overflow-y: scroll;
-  background-color: lightBlue;
+  background-color: #454c55;
+  z-index: 4;
+  border-top-right-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+  /* opacity: 0.3; */
 }
 
 .joiner {
   margin-top: 20px;
   margin-left: 20px;
-  border: 1px solid #97C6E3;
+  border: 1px solid #3399ff;
   border-radius: 15px;
   height: 60px;
   padding-top: 8px;
   padding-left: 10px;
-  background-color: #454c55;
+  background-color: #3399ff;
   color: white;
+  z-index: 4;
 }
 
 /* testing */
@@ -258,6 +256,9 @@ opacity: 0.8;
   height: 750px;
   left: 150px;
   margin-top: 20px;
+  z-index: 4;
+  border-right-color: transparent;
+  /* opacity: 0.3; */
 }
 
 .wrapper > div.main-container {
@@ -267,10 +268,13 @@ opacity: 0.8;
   padding: 10px 10px;
   width: 1050px;
   height: 100%;
-  background: #F1F0F0;
+  background: #454c55;
   border-radius: 4px;
   box-shadow: inset 0px 0px 18px -5px rgba(0,0,0,0.75);
   margin-right: -5px;
+  border-top-left-radius: 10px 10px;
+  border-bottom-left-radius: 10px 10px;
+  border-right-color: transparent;
 }
 
 div.main-container > div.message-area {
@@ -279,7 +283,9 @@ div.main-container > div.message-area {
   height: 650px;
   margin-top: 5px;
   background: white;
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding-top: 10px;
+  background-color: #F4F6F7;
 }
 div.main-container > div.enter-area {
   width: 100%;
@@ -295,6 +301,7 @@ div.main-container > div.enter-area > form > input#message-ent{
   height: 105%;
   padding-left: 10px;
   left: 1px;
+  background-color: #F4F6F7;
 }
 div.main-container > div.enter-area > form > input#message-send{
   border: none; /*remove styling */
@@ -304,6 +311,8 @@ div.main-container > div.enter-area > form > input#message-send{
   float: right;
   background-color: #00B7D1;
   color: white;
+  cursor: pointer;
+  /* border-bottom-style: solid; */
   /* padding-right: 10px; */
 }
 
@@ -420,4 +429,28 @@ div.main-container > div.enter-area > form > input#message-send{
     border-right: 16px solid transparent;
     bottom: -1px;
     right: -17px;
+}
+
+#root > div.chatroom > div.wrapper > div > div:nth-child(3) > div {
+  position: absolute;
+  left: 700px;
+  z-index: 10;
+  top: 245px;
+}
+
+.emoji-button {
+  position: absolute;
+  left: 780px;
+  top: 675px;
+  font-size: 30px;
+}
+
+.break-button {
+  position: absolute;
+  width: 250px;
+  height: 150px;
+  left: 1600px;
+  top: 105px;
+  z-index: 5;
+  cursor: pointer;
 }

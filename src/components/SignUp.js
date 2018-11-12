@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {API_ROOT, HEADERS} from '../constants/index';
-// import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-// import Paper from "@material-ui/core/Paper";
-import { NavLink } from "react-router-dom";
 import userLarge from '../Img/userLarge.jpg'
 import userSmall from '../Img/userSmall.jpg'
+import { connect } from "react-redux";
+import { loginUser } from '../action/user';
+import { Redirect } from 'react-router';
 
 
 class SignUp extends Component {
@@ -18,7 +18,7 @@ class SignUp extends Component {
     firstname: "",
     lastname: "",
     email: "",
-    password_digest: ""
+    password: ""
   }
 
   handleOnChange = (event) => {
@@ -34,21 +34,28 @@ class SignUp extends Component {
       method: "POST",
       headers: HEADERS,
       body: JSON.stringify({
+        user: {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         email: this.state.email,
-        password_digest: this.state.password_digest,
-        large_picture: userLarge,
-        small_picture: userSmall,
-        city_location: "Manhattan",
-        state_location: "New York"
+        password: this.state.password
+      }
       })
     }).then(r => r.json())
-    .then(console.log)
+    .then(response => {
+        if (response.user) {
+          this.props.loginUser(this.state.email, this.state.password)
+        } else {
+          alert("This Email has been registered")
+        }
+      }
+    )
   }
 
   render() {
-    return (
+    return this.props.loggedIn ? (
+      <Redirect to="/mainpage" />
+    ) : (
       <React.Fragment>
         <CssBaseline />
         <main className="login-form">
@@ -65,6 +72,7 @@ class SignUp extends Component {
               </InputLabel>
               <Input
                 onChange={this.handleOnChange}
+                value={this.state.firstname}
                 name="firstname"
                 className="color"
                 style={{
@@ -83,6 +91,7 @@ class SignUp extends Component {
               </InputLabel>
               <Input
                 onChange={this.handleOnChange}
+                value={this.state.lastname}
                 name="lastname"
                 className="color"
                 style={{
@@ -103,6 +112,7 @@ class SignUp extends Component {
                 onChange={this.handleOnChange}
                 name="email"
                 className="color"
+                value={this.state.email}
                 style={{
                   color: "white"
                 }}
@@ -119,9 +129,10 @@ class SignUp extends Component {
               </InputLabel>
               <Input
                 onChange={this.handleOnChange}
-                name="password_digest"
+                name="password"
                 type="password"
                 className="color"
+                value={this.state.password}
                 style={{
                   color: "white"
                 }}
@@ -141,14 +152,7 @@ class SignUp extends Component {
                 backgroundColor: "#1B1B1D"
               }}
             >
-              <NavLink
-                style={{
-                  color: "white"
-                }}
-                to="/mainpage"
-              >
                 SignUp
-              </NavLink>
             </Button>
           </form>
         </main>
@@ -158,13 +162,12 @@ class SignUp extends Component {
 
 }
 
-export default SignUp;
+const mapStateToProps = ({ usersReducer: {authenticatingUser, failedLogin, error, loggedIn, currentUser } }) => ({
+  authenticatingUser,
+  failedLogin,
+  error,
+  loggedIn,
+  currentUser
+})
 
-// <form className="" onSubmit={this.handleSubmit} >
-//   <input onChange={this.handleChange} type="text" name="firstname" value={this.state.firstname} placeholder="Firstname" />
-//   <input onChange={this.handleChange} type="text" name="lastname" value={this.state.lastname} placeholder="Lastname"/>
-//   <input onChange={this.handleChange} type="text" name="email" value={this.state.email} placeholder="Email" />
-//   <input onChange={this.handleChange} type="text" name="password_digest" value={this.state.password_digest} placeholder="Password"/>
-//   <input type="submit" name="submit"/>
-// </form>
-// "#16203d"
+export default connect(mapStateToProps, {loginUser})(SignUp)

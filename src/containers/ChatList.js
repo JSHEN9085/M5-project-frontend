@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Chat from '../components/Chat';
 import { ActionCable } from 'react-actioncable-provider';
 import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react';
 
 import '../index.css'
 
@@ -11,6 +12,19 @@ class ChatList extends Component {
     const { chat } = response;
     this.props.addChat(chat)
   };
+
+  handleFilterTopic = (event) => {
+    let chats = [...this.props.chats.chats];
+    if (this.props.chats.ifFiltered === true) {
+      chats.sort((chat1, chat2) => ('' + chat1.topic).localeCompare(chat2.topic))
+      this.props.filterChats(chats)
+      this.props.switchFilter()
+    } else {
+      chats.sort((chat1, chat2) => chat1.id - chat2.id)
+      this.props.filterChats(chats)
+      this.props.switchFilter()
+    }
+  }
 
   render() {
     return (
@@ -31,9 +45,10 @@ class ChatList extends Component {
                   Created By
                 </h3>
               </th>
-              <th>
+              <th onClick={this.handleFilterTopic}>
                 <h3 className="ui center aligned header 2">
                   Topic
+                  <Icon name='caret down'/>
                 </h3>
               </th>
               <th>
@@ -56,10 +71,12 @@ class ChatList extends Component {
 
 }
 
-const mapStateToProps = ( {chatsReducer: chats}) => ({ chats })
+const mapStateToProps = ( {chatsReducer: chats, ifFiltered}) => ({ chats, ifFiltered })
 
 const mapDispatchToProps = dispatch => ({
-  addChat: chat => dispatch({type: "ADD_CHAT", chat})
+  addChat: chat => dispatch({type: "ADD_CHAT", chat}),
+  filterChats: chats => dispatch({type: "FILTER_CHATS", chats}),
+  switchFilter: () => dispatch({type: "SWITCH_FILTER"})
 })
 
 export default connect(mapStateToProps, mapDispatchToProps) (ChatList);

@@ -1,11 +1,16 @@
 export default function chatsReducer(state = {
+  initialChats: [],
   chats: [],
-  activeChat: null
+  activeChat: null,
+  ifFiltered: false
 }, action) {
   switch(action.type) {
 
     case 'INITIAL_CHATS':
-      return {...state, chats: [...state.chats].concat(action.chats)}
+      return {...state,
+        initialChats: action.chats,
+        chats: action.chats
+      }
 
     case 'ADD_CHAT':
       return {...state,
@@ -20,6 +25,16 @@ export default function chatsReducer(state = {
     case 'ADD_MESSAGE':
       return {...state,
         activeChat: action.chat
+      }
+
+    case 'FILTER_CHATS':
+      return {...state,
+        chats: action.chats
+      }
+
+    case 'SWITCH_FILTER':
+      return {...state,
+        ifFiltered: !state.ifFiltered
       }
 
     default:
