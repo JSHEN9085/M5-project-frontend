@@ -32,7 +32,12 @@ class Chatroom extends Component {
       .then(r => r.json())
       .then(messages => {
         chat.messages = messages
-        this.props.selectChat(chat)
+        if ( chat.users.find(user => user.id === this.props.user.user.id ) ){
+          this.props.selectChat(chat)
+        } else {
+          chat.users.push(this.props.user.user)
+          this.props.selectChat(chat)
+        }
       })
     })
   }
@@ -63,9 +68,10 @@ class Chatroom extends Component {
   }
 
   render() {
+    // console.log(this.props);
     return (
       <React.Fragment>
-        <Navbar/>
+        <Navbar history={this.props.history}/>
          {this.props.activeChat.activeChat? (<div className="chatroom" >
             <ActionCable
               channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.activeChat.id}}

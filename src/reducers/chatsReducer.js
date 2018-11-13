@@ -37,6 +37,13 @@ export default function chatsReducer(state = {
         ifFiltered: !state.ifFiltered
       }
 
+    case 'EXIT_ROOM':
+      return {...state,
+        activeChat: null
+      }
+
+      break;
+
     default:
       return state;
   }

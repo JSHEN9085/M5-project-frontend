@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {API_ROOT, HEADERS} from '../constants/index'
+import { Image} from 'semantic-ui-react';
 
 
 class Message extends Component {
@@ -28,26 +29,33 @@ class Message extends Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       this.props.message.user_id === this.props.user.user.id ?
-        (<div className="message-orange">
-          <h4 className="message-content">
-            {this.props.user.user.firstname} said
-            {this.checkTime() ?
-            <button className="recall-my-message" onClick={this.handleRecall}>x</button>
-            :
-            null
-            }
-          </h4>
-
-           <p className="message-content">{this.props.message.content}</p>
-           <div className="message-timestamp-right">{this.props.message.created_at}</div>
+        (
+          <div>
+            <div className="message-orange">
+            <h4 className="message-content">
+              {this.props.user.user.firstname} said
+              {this.checkTime() ?
+              <button className="recall-my-message" onClick={this.handleRecall}>x</button>
+              :
+              null
+              }
+            </h4>
+             <p className="message-content">{this.props.message.content}</p>
+             <div className="message-timestamp-right">{this.props.message.created_at}</div>
+           </div>
+           <Image className="picture-orange" avatar src={this.props.user.user.small_picture} />
          </div>
         ) : (
-         <div className="message-blue">
-           {this.props.message.user? <h4 className="message-content">{this.props.message.user.firstname} said </h4> : null}
-            <p className="message-content">{this.props.message.content}</p>
-            <div className="message-timestamp-left">{this.props.message.created_at}</div>
+          <div>
+            <Image className="picture-blue" avatar src={this.props.message.user.small_picture} />
+            <div className="message-blue">
+              {this.props.message.user? <h4 className="message-content">{this.props.message.user.firstname} said </h4> : null}
+              <p className="message-content">{this.props.message.content}</p>
+              <div className="message-timestamp-left">{this.props.message.created_at}</div>
+            </div>
           </div>
         )
     )

@@ -5,16 +5,27 @@ import React, { Component } from 'react';
 // import Background2 from '../Img/bg-2.jpg'
 // import Background3 from '../Img/bg-3.jpg'
 // import Background0 from '../Img/bg-00.gif'
-// import { Card, Image, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { Modal } from 'semantic-ui-react'
 import Video from '../Img/typing.mp4'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
+import { loginUser } from '../action/user'
+import { connect } from "react-redux";
+import { Redirect } from 'react-router';
+
 
 class Home extends Component {
 
+  handleLoginAsGuest = (event) => {
+    this.props.loginUser("guest@flatiron.com", "123")
+  }
+
   render() {
-    return (
+    return this.props.user.loggedIn ?
+    (<Redirect to="/mainpage" />)
+    :
+    (
       <React.Fragment>
         <div className="app-name">
           Flatiron RealTime Forum
@@ -36,6 +47,11 @@ class Home extends Component {
               </Modal>
           </div>
 
+          <div className="home-guest">
+            <Button color='green' className="home-guest-btn" onClick={this.handleLoginAsGuest}>
+              Log In as Super Guest
+            </Button>
+          </div>
         <video id="background-video" loop autoPlay>
           <source src={Video} type="video/mp4" />
           <source src={Video} type="video/ogg" />
@@ -46,7 +62,9 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = ({ usersReducer: user }) => ({ user })
+
+export default connect(mapStateToProps, {loginUser})(Home);
 
 // <BackgroundSlideshow
 //   images={[ Background1, Background2, Background3 ]}

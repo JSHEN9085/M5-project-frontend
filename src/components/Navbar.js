@@ -14,6 +14,7 @@ class Navbar extends Component {
 
   handleLogout = (event) => {
     this.props.logout()
+    this.props.history.push('/')
     localStorage.clear()
   }
 
@@ -27,7 +28,8 @@ class Navbar extends Component {
           chat_id: this.props.chats.activeChat.id,
           user_id: this.props.user.user.id
         })
-      })
+      }).then(() => this.props.exitRoom())
+      .then(() => this.props.history.push('/mainpage'))
     }
   }
 
@@ -48,7 +50,7 @@ class Navbar extends Component {
   render () {
     return (
         <div className="ui secondary pointing menu" id="Navbar">
-          <a href="http://localhost:3001/mainpage" className="item active" onClick={this.handleUnsubscribe}>
+          <a className="item active" onClick={this.handleUnsubscribe}>
             Home
           </a>
           <a className="item active">
@@ -58,7 +60,7 @@ class Navbar extends Component {
             <div className="ui item">
               {this.props.user.user ? this.currentUserName() : null}
             </div>
-            <a href="http://localhost:3001" className="ui item" onClick={this.handleLogout}>
+            <a className="ui item" onClick={this.handleLogout}>
               Logout
             </a>
           </div>
@@ -71,4 +73,6 @@ const mapStateToProps = ({ usersReducer: user, chatsReducer: chats }) => ({ user
 
 const logout = () => ({type: 'LOG_OUT'})
 
-export default connect(mapStateToProps, {logout, fetchCurrentUser})(Navbar);
+const exitRoom = () => ({type: "EXIT_ROOM"})
+
+export default connect(mapStateToProps, {logout, exitRoom, fetchCurrentUser})(Navbar);

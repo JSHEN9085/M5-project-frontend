@@ -43,7 +43,7 @@ class MainPage extends Component {
     return (
         <React.Fragment>
 
-          <Navbar/>
+          <Navbar history={this.props.history}/>
 
           <div className="ui segment blue inverted">
             <h2>Flatiron RealTime Forum</h2>

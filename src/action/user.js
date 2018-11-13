@@ -4,7 +4,6 @@ export const loginUser = (email, password) => {
   return (dispatch) => {
 
     dispatch(authenticatingUser())
-
     fetch(`${API_ROOT}/login`, {
       method: "POST",
       headers: HEADERS,
@@ -16,7 +15,6 @@ export const loginUser = (email, password) => {
       })
     }).then(response => {
       if (response.ok) {
-        console.log(response);
         return response.json()
       } else {
         throw response

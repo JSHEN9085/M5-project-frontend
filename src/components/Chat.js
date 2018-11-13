@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import {API_ROOT, HEADERS} from '../constants/index'
 import '../index.css'
 import Flatiron from '../Img/userSmall.jpg'
+import Jun from '../Img/Jun.jpg'
+import Super from '../Img/Super.jpg'
 
 
 class Chat extends Component {
