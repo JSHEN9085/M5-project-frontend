@@ -66,7 +66,7 @@ class Chatroom extends Component {
     return (
       <React.Fragment>
         <Navbar/>
-         {this.props.activeChat.activeChat && <div className="chatroom" >
+         {this.props.activeChat.activeChat? (<div className="chatroom" >
             <ActionCable
               channel={{ channel: 'MessagesChannel', chat: this.props.activeChat.activeChat.id}}
               onReceived={this.handleReceivedMessage}
@@ -78,6 +78,9 @@ class Chatroom extends Component {
             <Messages />
             <Joiners joiners={this.props.activeChat.activeChat.users}/>
           </div>
+          )
+          :
+          null
         }
         <button onClick={this.handleBreak}><img className="break-button" src={Break} alt="" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}/></button>
         <BackgroundSlideshow
