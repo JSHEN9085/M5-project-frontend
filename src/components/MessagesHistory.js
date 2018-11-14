@@ -18,7 +18,6 @@ class MessagesHistory extends Component {
   }
 
   render() {
-    console.log(this.state.searchBy);
     return (
       <div className="messages-history-container">
         <div className="ui huge fluid icon input">

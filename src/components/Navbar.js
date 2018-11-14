@@ -13,6 +13,17 @@ class Navbar extends Component {
  }
 
   handleLogout = (event) => {
+    if (this.props.chats.activeChat) {
+      const chatId = this.props.chats.activeChat.id
+      fetch(`${API_ROOT}/chats/${chatId}/subscriptions/delete`, {
+        method: "DELETE",
+        headers: HEADERS,
+        body: JSON.stringify({
+          chat_id: this.props.chats.activeChat.id,
+          user_id: this.props.user.user.id
+        })
+      }).then(() => this.props.exitRoom())
+    }
     this.props.logout()
     this.props.history.push('/')
     localStorage.clear()

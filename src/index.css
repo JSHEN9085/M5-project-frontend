@@ -407,7 +407,7 @@ div.main-container > div.enter-area > form > input#message-send{
 
 .message-timestamp-right {
     position: absolute;
-    font-size: .85em;
+    font-size: 10pt;
     font-weight: 300;
     bottom: 5px;
     right: 18px;
@@ -415,10 +415,10 @@ div.main-container > div.enter-area > form > input#message-send{
 
 .message-timestamp-left {
   position: absolute;
-  font-size: .85em;
+  font-size: 10pt;
   font-weight: 300;
   bottom: 5px;
-  left: 155px;
+  left: 245px;
 }
 
 

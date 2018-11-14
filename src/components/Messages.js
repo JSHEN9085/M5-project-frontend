@@ -44,18 +44,23 @@ class Messages extends Component {
     }
   }
 
+  handleSubmitNothing = e => {
+    e.preventDefault();
+  }
+
   handleSubmit = e => {
     e.preventDefault();
-
-    fetch(`${API_ROOT}/chats/${this.props.chats.activeChat.id}/messages`, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify({
-        content: this.state.content,
-        chat_id: this.props.chats.activeChat.id,
-        user_id: this.props.user.user.id
+    if (this.state.content.length){
+      fetch(`${API_ROOT}/chats/${this.props.chats.activeChat.id}/messages`, {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify({
+          content: this.state.content,
+          chat_id: this.props.chats.activeChat.id,
+          user_id: this.props.user.user.id
+        })
       })
-    });
+    }
     this.setState({ content: '' });
   };
 
@@ -67,7 +72,6 @@ class Messages extends Component {
           <div className="message-area" >
             {this.props.chats.activeChat.messages.length ? this.props.chats.activeChat.messages.slice(-5).map(message => <Message key={message.id} message={message}/> ) : null}
           </div>
-
 
           <div className="enter-area">
             <form onSubmit={this.handleSubmit}>
