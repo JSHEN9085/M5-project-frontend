@@ -26,6 +26,7 @@ class Navbar extends Component {
     }
     this.props.logout()
     this.props.history.push('/')
+    this.props.returnFromBreak()
     localStorage.clear()
   }
 
@@ -42,6 +43,7 @@ class Navbar extends Component {
       }).then(() => this.props.exitRoom())
       .then(() => this.props.history.push('/mainpage'))
     }
+    this.props.returnFromBreak()
   }
 
   currentUserName = () => {
@@ -65,7 +67,7 @@ class Navbar extends Component {
             Home
           </a>
           <a className="item active">
-            Friendship
+            {/*Friendship*/}
           </a>
           <div className="right menu" >
             <div className="ui item">
@@ -86,4 +88,6 @@ const logout = () => ({type: 'LOG_OUT'})
 
 const exitRoom = () => ({type: "EXIT_ROOM"})
 
-export default connect(mapStateToProps, {logout, exitRoom, fetchCurrentUser})(Navbar);
+const returnFromBreak = () => ({type: "RETURN_TO_CHAT"})
+
+export default connect(mapStateToProps, {logout, exitRoom, fetchCurrentUser, returnFromBreak})(Navbar);

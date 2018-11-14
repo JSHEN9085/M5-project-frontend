@@ -19,17 +19,21 @@ class NewChatForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    fetch(`${API_ROOT}/chats`, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify(this.state)
-    }).then(response => {
-      if (response.status === 200){
-        this.props.handleClose()
-      } else {
-        alert("Please enter a topic")
-      }
-    })
+    if (this.state.topic.length <= 70) {
+      fetch(`${API_ROOT}/chats`, {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify(this.state)
+      }).then(response => {
+        if (response.status === 200){
+          this.props.handleClose()
+        } else {
+          alert("Please enter a topic")
+        }
+      })
+    } else {
+      alert("Length of your topic is over the limit")
+    }
     this.setState({ topic: '' });
   };
 

@@ -50,7 +50,7 @@ class Messages extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.content.length){
+    if (this.state.content.length <= 50){
       fetch(`${API_ROOT}/chats/${this.props.chats.activeChat.id}/messages`, {
         method: 'POST',
         headers: HEADERS,
@@ -60,11 +60,14 @@ class Messages extends Component {
           user_id: this.props.user.user.id
         })
       })
+    } else {
+      alert("message is too long")
     }
     this.setState({ content: '' });
   };
 
   render() {
+    console.log(this.state.content.length);
     return (
       <div className="wrapper" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}>
         <div className="main-container">

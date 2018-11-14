@@ -159,15 +159,15 @@ opacity: 0.8;
 }
 
 #root > table > tbody > tr > th:nth-child(1) {
-  width: 13%;
-}
-
-#root > table > tbody > tr > th:nth-child(3) {
   width: 20%;
 }
 
+#root > table > tbody > tr > th:nth-child(3) {
+  width: 8%;
+}
+
 #root > table > tbody > tr > th:nth-child(4) {
-  width: 12%;
+  width: 10%;
 }
 
 #root > button {

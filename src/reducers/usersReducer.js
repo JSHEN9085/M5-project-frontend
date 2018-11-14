@@ -32,6 +32,11 @@ const usersReducer = /*FUNCTION*/ (state=defaultState, action) => {
         onBreak: !state.onBreak
       }
 
+    case 'RETURN_TO_CHAT':
+      return {...state,
+        onBreak: false
+      }
+
     case 'LOG_OUT':
       return {...state,
         user: null,
