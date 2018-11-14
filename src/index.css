@@ -178,6 +178,34 @@ opacity: 0.8;
 }
 
 /* chatroom style */
+.chat-room-topic {
+  width: 1400px;
+  position: absolute;
+  top: 105px;
+  height: 65px;
+  left: 150px;
+  color: white;
+  text-align: center;
+  z-index: 4;
+  font-size: 24pt;
+  padding-top: 22px;
+  background-color: #454c55;
+  border-top-left-radius: 10px 10px;
+  border-bottom-left-radius: 10px 10px;
+  border-top-right-radius: 10px 10px;
+  border-bottom-right-radius: 10px 10px;
+  border-right-color: transparent;
+}
+
+.messages-history {
+  position: absolute;
+  left: 100px;
+  top: 110px;
+  width: 50px;
+  height: 50px;
+  font-size: 20pt;
+  z-index: 4;
+}
 
 /* newChatForm */
 .new-chat-form {
@@ -222,22 +250,12 @@ opacity: 0.8;
   }
 
 /* Joiner Style */
-/* .joiner-list {
-  position: absolute;
-  border: 1px solid lightgray;
-  top: 20%;
-  right: 15%;
-  width: 20%;
-  height: 63%;
-  font-size: 20px;
-  overflow-y: scroll;
-} */
 
 .joiner-list {
   position: absolute;
   box-shadow: inset 0px 0px 18px -5px rgba(0,0,0,0.75);
   left: 1200px;
-  top: 100px;
+  top: 170px;
   /* right: 15%; */
   width: 350px;
   height: 750px;
@@ -267,7 +285,7 @@ opacity: 0.8;
 .wrapper {
   width: 150px;
   position: absolute;
-  top: 80px;
+  top: 150px;
   height: 750px;
   left: 150px;
   margin-top: 20px;
@@ -342,7 +360,7 @@ div.main-container > div.enter-area > form > input#message-send{
     position: relative;
     margin-left: 55px;
     margin-bottom: 10px;
-    margin-top: -10px;
+    margin-top: -14px;
     padding: 10px;
     background-color: #A8DDFD;
     width: 300px;
@@ -407,8 +425,10 @@ div.main-container > div.enter-area > form > input#message-send{
 .recall-my-message {
   position: absolute;
   font-weight: 300;
-  left: 255px;
+  left: 235px;
   background-color: #f8e896;
+  border: transparent;
+  cursor: pointer;
 }
 
 
@@ -482,4 +502,15 @@ div.main-container > div.enter-area > form > input#message-send{
   top: 105px;
   z-index: 5;
   cursor: pointer;
+}
+
+/* history Container Style */
+.messages-history-container{
+  z-index: 5;
+}
+
+.no-messages {
+  font-size: 25pt;
+  text-align: center;
+  padding-bottom: 15px;
 }

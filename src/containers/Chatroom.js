@@ -5,6 +5,8 @@ import Joiners from '../components/Joiners';
 import Navbar from '../components/Navbar';
 import { connect } from 'react-redux';
 import Messages from '../components/Messages';
+import MessagesHistory from '../components/MessagesHistory'
+import { Modal, Button, Icon } from 'semantic-ui-react'
 import BackgroundSlideshow from 'react-background-slideshow';
 import Background6 from '../Img/bg-6.jpg';
 import Background7 from '../Img/bg-7.jpg';
@@ -43,10 +45,18 @@ class Chatroom extends Component {
   }
 
   handleReceivedMessage = response => {
-    const { message } = response;
+    console.log(response);
     let chat = {...this.props.activeChat.activeChat};
-    chat.messages = [...chat.messages, message];
+    if (this.props.activeChat.activeChat.messages.find(message => message.id === response.message.id)) {
+      // console.log("inside the right place");
+      const targetMessage = chat.messages.find(message => message.id === response.message.id);
+      const messageIndex = chat.messages.indexOf(targetMessage);
+      chat.messages.splice(messageIndex, 1)
+    } else {
+      chat.messages = [...chat.messages, response.message];
+    }
     this.props.addMessage(chat);
+    // console.log(chat);
   };
 
   handleReceivedSubscription = response => {
@@ -68,7 +78,6 @@ class Chatroom extends Component {
   }
 
   render() {
-    // console.log(this.props);
     return (
       <React.Fragment>
         <Navbar history={this.props.history}/>
@@ -81,6 +90,17 @@ class Chatroom extends Component {
               channel={{ channel: 'SubscriptionsChannel', chat: this.props.activeChat.activeChat.id }}
               onReceived={this.handleReceivedSubscription}
             />
+
+          <Modal trigger={<Button icon className="messages-history" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}>
+              <Icon name='align justify' className="messages-history-icon"/>
+            </Button>}>
+            <MessagesHistory/>
+          </Modal>
+
+          <div className="chat-room-topic" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}>
+            {this.props.activeChat.activeChat.topic}
+          </div>
+
             <Messages />
             <Joiners joiners={this.props.activeChat.activeChat.users}/>
           </div>

@@ -6,9 +6,20 @@ import { Image} from 'semantic-ui-react';
 
 class Message extends Component {
 
+  state = {
+    time: new Date
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: new Date }), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+
   checkTime = () => {
-    const currentTime = new Date
-    if ( (currentTime.getTime() - Date.parse(this.props.message.created_at)) / 1000 > 5 ){
+    if ( (this.state.time.getTime() - Date.parse(this.props.message.created_at)) / 1000 > 5 ){
       return false
     } else {
       return true
@@ -20,16 +31,10 @@ class Message extends Component {
       method: "DELETE",
       headers: HEADERS,
       body: JSON.stringify({})
-    }).then(() => {
-      let chat = {...this.props.chats.activeChat}
-      const position = chat.messages.indexOf(this.props.message)
-      chat.messages.splice(position, 1)
-      this.props.addMessage(chat)
     })
   }
 
   render () {
-    console.log(this.props);
     return (
       this.props.message.user_id === this.props.user.user.id ?
         (
@@ -38,7 +43,7 @@ class Message extends Component {
             <h4 className="message-content">
               {this.props.user.user.firstname} said
               {this.checkTime() ?
-              <button className="recall-my-message" onClick={this.handleRecall}>x</button>
+              <button className="recall-my-message" onClick={this.handleRecall}>recall</button>
               :
               null
               }

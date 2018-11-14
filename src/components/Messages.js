@@ -4,6 +4,7 @@ import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import { connect } from 'react-redux';
 import Message from './Message';
+import { Button, Icon } from 'semantic-ui-react'
 
 class Messages extends Component {
 
@@ -64,7 +65,7 @@ class Messages extends Component {
         <div className="main-container">
 
           <div className="message-area" >
-            {this.props.chats.activeChat.messages.length ? this.props.chats.activeChat.messages.map(message => <Message key={message.id} message={message}/> ) : null}
+            {this.props.chats.activeChat.messages.length ? this.props.chats.activeChat.messages.slice(-5).map(message => <Message key={message.id} message={message}/> ) : null}
           </div>
 
 
