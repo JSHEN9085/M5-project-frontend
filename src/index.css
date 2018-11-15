@@ -174,7 +174,7 @@ opacity: 0.8;
   background-color: #2185d0;
   color: white;
   font-size: 15pt;
-  margin-left: 44%;
+  margin-left: 45%;
 }
 
 /* chatroom style */
@@ -364,7 +364,8 @@ div.main-container > div.enter-area > form > input#message-send{
     padding: 10px;
     background-color: #A8DDFD;
     width: 300px;
-    height: 100px;
+    min-height: 100px;
+    overflow: hidden;
     text-align: left;
     font: 400 .9em 'Open Sans', sans-serif;
     border: 1px solid #97C6E3;
@@ -384,7 +385,8 @@ div.main-container > div.enter-area > form > input#message-send{
     padding: 10px;
     background-color: #f8e896;
     width: 300px;
-    height: 100px;
+    min-height: 100px;
+    overflow: hidden;
     text-align: left;
     font: 400 .9em 'Open Sans', sans-serif;
     border: 1px solid #dfd087;

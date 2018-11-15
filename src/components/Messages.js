@@ -13,6 +13,22 @@ class Messages extends Component {
     openEmoji: false
   };
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate(prevProps) {
+    // console.log(prevProps.chats.activeChat.messages.length);
+    // console.log(this.props.chats.activeChat.messages.length);
+    if (this.props.chats.activeChat.messages.length !== prevProps.chats.activeChat.messages.length) {
+      this.scrollToBottom()
+    }
+  }
+
   handleChange = e => {
     this.setState({ content: e.target.value });
   };
@@ -44,13 +60,9 @@ class Messages extends Component {
     }
   }
 
-  handleSubmitNothing = e => {
-    e.preventDefault();
-  }
-
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.content.length <= 50){
+    if (this.state.content.length <= 1000){
       fetch(`${API_ROOT}/chats/${this.props.chats.activeChat.id}/messages`, {
         method: 'POST',
         headers: HEADERS,
@@ -67,14 +79,17 @@ class Messages extends Component {
   };
 
   render() {
-    console.log(this.state.content.length);
     return (
       <div className="wrapper" style={this.props.user.onBreak ? {opacity: 0.3} : {opacity: 1}}>
         <div className="main-container">
 
           <div className="message-area" >
             {this.props.chats.activeChat.messages.length ? this.props.chats.activeChat.messages.slice(-5).map(message => <Message key={message.id} message={message}/> ) : null}
+            <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </div>
+
 
           <div className="enter-area">
             <form onSubmit={this.handleSubmit}>

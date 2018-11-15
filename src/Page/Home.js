@@ -70,3 +70,6 @@ export default connect(mapStateToProps, {loginUser})(Home);
 //   images={[ Background1, Background2, Background3 ]}
 //   animationDelay={4000}/>
 // sylvain.david@example.com
+
+// lasse.svingen@example.com
+// 123
