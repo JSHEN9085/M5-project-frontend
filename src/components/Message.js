@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {API_ROOT, HEADERS} from '../constants/index'
-import { Image} from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
+import Flatiron from '../Img/userSmall.jpg'
 
 
 class Message extends Component {
@@ -49,7 +50,7 @@ class Message extends Component {
           <div>
             <div className="message-orange">
             <h4 className="message-content">
-              {this.props.user.user.firstname} said
+              You said
               {this.checkTime() ?
               <button className="recall-my-message" onClick={this.handleRecall}>recall</button>
               :
@@ -59,11 +60,18 @@ class Message extends Component {
              <p className="message-content">{this.props.message.content}</p>
              <div className="message-timestamp-right">{this.convertTime(this.props.message.created_at)}</div>
            </div>
-           <Image className="picture-orange" avatar src={this.props.user.user.small_picture} />
+           {this.props.user.user.small_picture ?
+             <Image className="picture-orange" avatar src={this.props.user.user.small_picture} />
+             :
+             <Image className="picture-orange" avatar src={Flatiron} /> 
+           }
          </div>
         ) : (
           <div>
-            <Image className="picture-blue" avatar src={this.props.message.user.small_picture} />
+            {this.props.message.user.small_picture ?
+              <Image className="picture-blue" avatar src={this.props.message.user.small_picture} />
+              :
+              <Image className="picture-blue" avatar src={Flatiron} />}
             <div className="message-blue">
               {this.props.message.user? <h4 className="message-content">{this.props.message.user.firstname} said </h4> : null}
               <p className="message-content">{this.props.message.content}</p>

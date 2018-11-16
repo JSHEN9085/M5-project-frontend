@@ -38,7 +38,7 @@ class Login extends Component {
         <CssBaseline />
         <main className="login-form">
           <form className="login" onSubmit={this.handleSubmit}>
-            <h1 className="log">Login </h1>
+            <h1 className="log">Log In </h1>
             <FormControl margin="normal" required fullWidth>
               <InputLabel
                 htmlFor="email"

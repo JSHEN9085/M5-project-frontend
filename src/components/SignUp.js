@@ -60,7 +60,7 @@ class SignUp extends Component {
         <CssBaseline />
         <main className="login-form">
           <form onSubmit={this.handleSubmit} className="signup">
-            <h1 className="log">SignUp</h1>
+            <h1 className="log">Sign Up</h1>
             <FormControl margin="normal" required fullWidth>
               <InputLabel
                 htmlFor="username"

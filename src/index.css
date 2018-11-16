@@ -374,8 +374,10 @@ div.main-container > div.enter-area > form > input#message-send{
 
 .picture-blue {
   position: relative;
-  margin-left: 5px;
+  margin-left: 13px;
   margin-top: 5px;
+  width: 3.0em;
+  height: 3.0em;
 }
 
 .message-orange {
@@ -396,8 +398,10 @@ div.main-container > div.enter-area > form > input#message-send{
 .picture-orange {
   position: relative;
   margin-bottom: 10px;
-  margin-left: calc(100% - 70px);
+  margin-left: calc(100% - 80px);
   margin-top: -25px;
+  width: 2.5em;
+  height: 2.5em;
 }
 
 .message-content {
